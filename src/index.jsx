@@ -4,6 +4,7 @@ import { render } from 'react-dom';
 import { asyncComponent } from './asyncComponent.jsx';
 
 global.React = React
+global.require = () => {}
 
 const LazyComponent = asyncComponent({
     prefix: 'pr2/dist',
