@@ -1,5 +1,5 @@
-import  { Provider } from 'react-redux'
-import { createStore } from 'redux'
+const { Provider } = ReactRedux
+const { createStore } = Redux
 
 export const HelloSubApp = () => {
   const [count, setCount] = React.useState(0)

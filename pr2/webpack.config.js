@@ -13,14 +13,6 @@ module.exports = {
         library: 'SubApp',
         libraryTarget: "commonjs"
     },
-    /**
-     * Without this you get invariant violations.
-     * With this webpack adds require statmenents not converted by es6-to-js.
-     * If you shim the require method you get createContext errors.
-     */
-    externals: {
-      react: { root: 'React', commonjs: 'react' }
-    },
     module: {
         rules: [
             {
