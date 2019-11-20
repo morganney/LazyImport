@@ -1,14 +1,12 @@
 import React, { useState, useCallback } from 'react';
 import ReactDOM from 'react-dom'
 import * as ReactRedux from 'react-redux'
-import * as Redux from 'redux'
 
 import { asyncComponent } from './asyncComponent.jsx';
 
 global.React = React
 global.ReactDOM = ReactDOM
 global.ReactRedux = ReactRedux
-global.Redux = Redux
 
 const LazyComponent = asyncComponent({
     prefix: 'pr2/dist',
