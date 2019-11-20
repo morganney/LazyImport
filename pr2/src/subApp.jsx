@@ -1,5 +1,7 @@
+import { store } from './store'
+
+const { useState, useEffect } = React
 const { Provider } = ReactRedux
-const { createStore } = Redux
 const { Switch, Route, Link, withRouter } = ReactRouterDOM
 const { Button } = ITHComponents
 const styled = StyledComponents.default
@@ -9,7 +11,11 @@ const Wrapper = styled.div`
   padding: 15px;
 `
 const Counter = () => {
-  const [count, setCount] = React.useState(0)
+  const [count, setCount] = useState(0)
+
+  useEffect(() => {
+    store.dispatch({ type: 'UPDATE', payload: 'Counter' })
+  }, [store])
 
   return (
     <Wrapper>
@@ -21,8 +27,12 @@ const Counter = () => {
   )
 }
 export const HelloSubApp = withRouter(({ match }) => {
+  useEffect(() => {
+    store.dispatch({ type: 'UPDATE', payload: 'SubApp' })
+  }, [store])
+
   return (
-    <Provider store={createStore(() => {})}>
+    <Provider store={store}>
       <Switch>
         <Route exact path={match.path}>
           <Link to={`${match.url}/counter`}>See counter</Link>
