@@ -6,6 +6,10 @@ const { Switch, Route, Link, withRouter } = ReactRouterDOM
 const { Button, ThemeProvider, RadioGroup, Radio, Heading, Box, Flex } = ITHComponents
 const styled = StyledComponents.default
 
+const FontStyles = styled.div`
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+`
 const Wrapper = styled(Flex)`
   border: 1px solid black;
   padding: 15px;
@@ -52,17 +56,19 @@ export const HelloSubApp = withRouter(({ match }) => {
   return (
     <ThemeProvider>
       <Provider store={store}>
-        <Switch>
-          <Route exact path={match.path}>
-            <Link to={`${match.url}/counter`}>See counter</Link>
-          </Route>
-          <Route path={`${match.path}/counter`}>
-            <Counter />
-          </Route>
-          <Route>
-            <p>Not found</p>
-          </Route>
-        </Switch>
+        <FontStyles>
+          <Switch>
+            <Route exact path={match.path}>
+              <Link to={`${match.url}/counter`}>See counter</Link>
+            </Route>
+            <Route path={`${match.path}/counter`}>
+              <Counter />
+            </Route>
+            <Route>
+              <p>Not found</p>
+            </Route>
+          </Switch>
+        </FontStyles>
       </Provider>
     </ThemeProvider>
   )

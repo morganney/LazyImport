@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React from 'react'
 import ReactDOM from 'react-dom'
 import * as ReactRedux from 'react-redux'
 import * as Redux from 'redux'
@@ -6,7 +6,7 @@ import * as ReactRouterDOM from 'react-router-dom'
 import * as ITHComponents from '@intouchhealth/components'
 import * as StyledComponents from 'styled-components'
 
-import { ExternalAsyncComponent } from './asyncComponent.jsx';
+import { ExternalAsyncComponent } from './asyncComponent.jsx'
 
 global.React = React
 global.ReactDOM = ReactDOM
@@ -56,4 +56,4 @@ const Hello = () => {
   )
 }
 
-ReactDOM.render(<Hello/>, document.getElementById('app'));
+ReactDOM.render(<Hello/>, document.getElementById('app'))
