@@ -1,3 +1,1 @@
-import { HelloSubApp } from './subApp.jsx';
-
-export default HelloSubApp;
+export { HelloSubApp } from './subApp'

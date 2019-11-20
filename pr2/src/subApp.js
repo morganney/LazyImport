@@ -7,7 +7,7 @@ const { Button, ThemeProvider, RadioGroup, Radio, Heading, Box, Flex } = ITHComp
 const styled = StyledComponents.default
 
 const FontStyles = styled.div`
-  font-family: 'Montserrat', sans-serif;
+  font-family: Montserrat, sans-serif;
   font-weight: 500;
 `
 const Wrapper = styled(Flex)`

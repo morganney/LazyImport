@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Loading } from '@intouchhealth/components/messages/loading'
 
 const ExternalAsyncComponent = ({
   baseUrl,
@@ -18,9 +19,12 @@ const ExternalAsyncComponent = ({
             return import(/* webpackIgnore: true */ bundleUrl)
           })
           .then(module => {
-            this.setState({
-              Component: getComponent(module)
-            })
+            // Timeout added for demonstration purposes to fake latency in the fetch
+            setTimeout(() => {
+              this.setState({
+                Component: getComponent(module)
+              })
+            }, 500)
           })
       }
     }
@@ -32,7 +36,7 @@ const ExternalAsyncComponent = ({
         return <Component {...this.props} />
       }
 
-      return <p>Loading...</p>
+      return <Loading />
     }
   }
 

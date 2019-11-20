@@ -17,24 +17,16 @@ global.ITHComponents = ITHComponents
 global.StyledComponents = StyledComponents
 
 const { BrowserRouter: Router, Route, Link, Switch } = ReactRouterDOM
-const LazyComponent = ExternalAsyncComponent({
+const SubApp = ExternalAsyncComponent({
     baseUrl: '/pr2/dist',
     getBundleUrl: manifest => manifest['subApp.js'],
-    getComponent: module => module.SubApp.default
-});
+    getComponent: module => module.SubApp.HelloSubApp
+})
 const Demo = () => {
   return (
     <>
       <p>Hi from container.</p>
       <Link to='/subapp'>check out the subapp</Link>
-    </>
-  )
-}
-const SubApp = () => {
-  return (
-    <>
-      <p>Hi from subapp.</p>
-      <LazyComponent />
     </>
   )
 }
