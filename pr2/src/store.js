@@ -1,13 +1,17 @@
 import { createLogger } from 'redux-logger'
 
 const { createStore, applyMiddleware } = Redux
-const store = createStore((state = '', action) => {
+const store = createStore((state, action) => {
   switch (action.type) {
     case 'UPDATE':
-      return action.payload
+      return { ...state, area: action.payload }
+    case 'INCREMENT':
+      return { ...state, count: ++state.count }
+    case 'DECREMENT':
+      return { ...state, count: --state.count }
     default:
       return state
   }
-}, '', applyMiddleware(createLogger({ collapsed: true })))
+}, { area: '', count: 0 }, applyMiddleware(createLogger({ collapsed: true })))
 
 export { store }
