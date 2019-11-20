@@ -1,35 +1,42 @@
-import React, { Component } from 'react';;
+import React, { Component } from 'react'
 
-export function asyncComponent({prefix, loadManifest}) {
-    class AsyncComponent extends Component {
-        static Component = null;
-        state = {Component: AsyncComponent.Component};
+const ExternalAsyncComponent = ({
+  baseUrl,
+  getBundleUrl,
+  getComponent
+}) => {
+  class AsyncComponent extends Component {
+    state = { Component: null }
 
-        componentDidMount() {
-            if (!this.state.Component) {
-                loadManifest().then(manifest => {
-                    if(window.__import__) {
-                        console.log(window.__import__)
-                    }
-                    return import(/* webpackIgnore: true */`http://localhost:8080/${prefix}${manifest['subApp.js']}`)
-                }).then(module => {
-                    this.setState({
-                        Component: module.SubApp.default
-                    });
-                });
-            }
-        }
+    componentDidMount() {
+      if (!this.state.Component) {
+        fetch(`${baseUrl}/manifest.json`)
+          .then(res => res.json())
+          .then(manifest => {
+            const bundleUrl = `${baseUrl}${getBundleUrl(manifest)}`
 
-        render() {
-            const {Component} = this.state;
-
-            if (Component) {
-                return <Component {...this.props} />;
-            }
-
-            return null;
-        }
+            return import(/* webpackIgnore: true */ bundleUrl)
+          })
+          .then(module => {
+            this.setState({
+              Component: getComponent(module)
+            })
+          })
+      }
     }
 
-    return AsyncComponent;
+    render() {
+      const { Component } = this.state
+
+      if (Component) {
+        return <Component {...this.props} />
+      }
+
+      return <p>Loading...</p>
+    }
+  }
+
+  return AsyncComponent
 }
+
+export { ExternalAsyncComponent }

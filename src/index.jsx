@@ -2,31 +2,54 @@ import React, { useState, useCallback } from 'react';
 import ReactDOM from 'react-dom'
 import * as ReactRedux from 'react-redux'
 import * as Redux from 'redux'
+import * as ReactRouterDOM from 'react-router-dom'
 
-import { asyncComponent } from './asyncComponent.jsx';
+import { ExternalAsyncComponent } from './asyncComponent.jsx';
 
 global.React = React
 global.ReactDOM = ReactDOM
 global.ReactRedux = ReactRedux
 global.Redux = Redux
+global.ReactRouterDOM = ReactRouterDOM
 
-const LazyComponent = asyncComponent({
-    prefix: 'pr2/dist',
-    loadManifest: () =>
-        fetch('pr2/dist/manifest.json').then(resp => resp.json())
+const { BrowserRouter: Router, Route, Link, Switch } = ReactRouterDOM
+const LazyComponent = ExternalAsyncComponent({
+    baseUrl: '/pr2/dist',
+    getBundleUrl: manifest => manifest['subApp.js'],
+    getComponent: module => module.SubApp.default
 });
-
+const Demo = () => {
+  return (
+    <>
+      <p>Hi from container.</p>
+      <Link to='/subapp'>check out the subapp</Link>
+    </>
+  )
+}
+const SubApp = () => {
+  return (
+    <>
+      <p>Hi from subapp.</p>
+      <LazyComponent />
+    </>
+  )
+}
 const Hello = () => {
-    const [showLazyComponent, setShowStatus] = useState(false);
-
-    const showComponent = useCallback(() => setShowStatus(true), [setShowStatus]);
-
-    return (
-        <div>
-            <h1>Hello main App</h1>
-            <button onClick={showComponent}>Show component</button>
-            {showLazyComponent && <LazyComponent/>}
-        </div>)
+  return (
+    <Router>
+      <Switch>
+        <Route exact path='/'>
+          <Demo />
+        </Route>
+        <Route path='/subapp'>
+          <SubApp />
+        </Route>
+        <Route>
+          <p>Container route not found</p>
+        </Route>
+      </Switch>
+    </Router>
+  )
 }
 
 ReactDOM.render(<Hello/>, document.getElementById('app'));
