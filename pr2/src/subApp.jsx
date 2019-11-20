@@ -1,49 +1,69 @@
 import { store } from './store'
 
 const { useState, useEffect } = React
-const { Provider } = ReactRedux
+const { Provider, connect } = ReactRedux
 const { Switch, Route, Link, withRouter } = ReactRouterDOM
-const { Button } = ITHComponents
+const { Button, ThemeProvider, RadioGroup, Radio, Heading, Box, Flex } = ITHComponents
 const styled = StyledComponents.default
 
-const Wrapper = styled.div`
+const Wrapper = styled(Flex)`
   border: 1px solid black;
   padding: 15px;
+  flex-direction: column;
+  > div:last-child {
+    margin-top: 20px;
+  }
 `
-const Counter = () => {
-  const [count, setCount] = useState(0)
+const Counter = connect(
+  state => ({ count: state.count }),
+  {
+    update: () => ({ type: 'UPDATE', payload: 'Counter' }),
+    increment: () => ({ type: 'INCREMENT' }),
+    decrement: () => ({ type: 'DECREMENT' })
+  }
+)(({ count, update, increment, decrement }) => {
+  const [value, setValue] = useState('foo')
 
   useEffect(() => {
-    store.dispatch({ type: 'UPDATE', payload: 'Counter' })
-  }, [store])
+    update()
+  }, [update])
 
   return (
     <Wrapper>
-      Hello sub App
-      <span>count: {count}</span>
-      <Button onClick={() => setCount(count + 1)}>Plus</Button>
-      <Button onClick={() => setCount(count - 1)}>Minus</Button>
+      <Box>
+        <Heading level='2'>Count: {count}</Heading>
+        <Button onClick={() => increment()}>Plus</Button>
+        <Button onClick={() => decrement()}>Minus</Button>
+      </Box>
+      <Box>
+        <RadioGroup value={value} name='foobar' onChange={evt => setValue(evt.target.value)}>
+          <Radio label='Foo' value='foo' />
+          <Radio label='Bar' value='bar' />
+        </RadioGroup>
+      </Box>
     </Wrapper>
   )
-}
+})
 export const HelloSubApp = withRouter(({ match }) => {
   useEffect(() => {
     store.dispatch({ type: 'UPDATE', payload: 'SubApp' })
   }, [store])
 
   return (
-    <Provider store={store}>
-      <Switch>
-        <Route exact path={match.path}>
-          <Link to={`${match.url}/counter`}>See counter</Link>
-        </Route>
-        <Route path={`${match.path}/counter`}>
-          <Counter />
-        </Route>
-        <Route>
-          <p>Not found</p>
-        </Route>
-      </Switch>
-    </Provider>
+    <ThemeProvider>
+      <Provider store={store}>
+        <Switch>
+          <Route exact path={match.path}>
+            <Link to={`${match.url}/counter`}>See counter</Link>
+          </Route>
+          <Route path={`${match.path}/counter`}>
+            <Counter />
+          </Route>
+          <Route>
+            <p>Not found</p>
+          </Route>
+        </Switch>
+      </Provider>
+    </ThemeProvider>
   )
 })
