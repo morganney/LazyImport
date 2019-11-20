@@ -18,7 +18,7 @@ global.StyledComponents = StyledComponents
 
 const { BrowserRouter: Router, Route, Link, Switch } = ReactRouterDOM
 const SubApp = ExternalAsyncComponent({
-    baseUrl: '/pr2/dist',
+    baseUrl: '/subapp/dist',
     getBundleUrl: manifest => manifest['subApp.js'],
     getComponent: module => module.SubApp.HelloSubApp
 })
