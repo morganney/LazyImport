@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React from 'react'
 import ReactDOM from 'react-dom'
 import * as ReactRedux from 'react-redux'
 import * as Redux from 'redux'
@@ -6,7 +6,7 @@ import * as ReactRouterDOM from 'react-router-dom'
 import * as ITHComponents from '@intouchhealth/components'
 import * as StyledComponents from 'styled-components'
 
-import { ExternalAsyncComponent } from './asyncComponent.jsx';
+import { ExternalAsyncComponent } from './asyncComponent.jsx'
 
 global.React = React
 global.ReactDOM = ReactDOM
@@ -17,24 +17,16 @@ global.ITHComponents = ITHComponents
 global.StyledComponents = StyledComponents
 
 const { BrowserRouter: Router, Route, Link, Switch } = ReactRouterDOM
-const LazyComponent = ExternalAsyncComponent({
+const SubApp = ExternalAsyncComponent({
     baseUrl: '/pr2/dist',
     getBundleUrl: manifest => manifest['subApp.js'],
-    getComponent: module => module.SubApp.default
-});
+    getComponent: module => module.SubApp.HelloSubApp
+})
 const Demo = () => {
   return (
     <>
       <p>Hi from container.</p>
       <Link to='/subapp'>check out the subapp</Link>
-    </>
-  )
-}
-const SubApp = () => {
-  return (
-    <>
-      <p>Hi from subapp.</p>
-      <LazyComponent />
     </>
   )
 }
@@ -56,4 +48,4 @@ const Hello = () => {
   )
 }
 
-ReactDOM.render(<Hello/>, document.getElementById('app'));
+ReactDOM.render(<Hello/>, document.getElementById('app'))

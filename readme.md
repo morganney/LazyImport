@@ -6,3 +6,5 @@ You need to [authenticate with GitHub Registry](https://help.github.com/en/githu
 still `import` from redux, i.e. not use it as a global. However, I'm not sure this is any better since the container still
 requires it as a dependency (might as well have the sub-app reference it as a global too).
 * What about bookmarking, i.e. deep links into the sub-app's? We need to be able to allow bookmarks into sub-app's.
+* Might need to use localStorage, or redux store to determine whether async components (sub-apps) are loaded. Anytime you
+leave a route managed by the sub-app, it will unmount the async component and then re-fetch the import when going back.
