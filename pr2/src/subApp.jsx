@@ -1,17 +1,23 @@
 const { Provider } = ReactRedux
 const { createStore } = Redux
 const { Switch, Route, Link, withRouter } = ReactRouterDOM
+const { Button } = ITHComponents
+const styled = StyledComponents.default
 
+const Wrapper = styled.div`
+  border: 1px solid black;
+  padding: 15px;
+`
 const Counter = () => {
   const [count, setCount] = React.useState(0)
 
   return (
-    <div>
+    <Wrapper>
       Hello sub App
       <span>count: {count}</span>
-      <button onClick={() => setCount(count + 1)}>Plus</button>
-      <button onClick={() => setCount(count - 1)}>Minus</button>
-    </div>
+      <Button onClick={() => setCount(count + 1)}>Plus</Button>
+      <Button onClick={() => setCount(count - 1)}>Minus</Button>
+    </Wrapper>
   )
 }
 export const HelloSubApp = withRouter(({ match }) => {
