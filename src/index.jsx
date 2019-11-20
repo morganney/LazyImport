@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom'
 import * as ReactRedux from 'react-redux'
 import * as Redux from 'redux'
 import * as ReactRouterDOM from 'react-router-dom'
+import * as ITHComponents from '@intouchhealth/components'
+import * as StyledComponents from 'styled-components'
 
 import { ExternalAsyncComponent } from './asyncComponent.jsx';
 
@@ -11,6 +13,8 @@ global.ReactDOM = ReactDOM
 global.ReactRedux = ReactRedux
 global.Redux = Redux
 global.ReactRouterDOM = ReactRouterDOM
+global.ITHComponents = ITHComponents
+global.StyledComponents = StyledComponents
 
 const { BrowserRouter: Router, Route, Link, Switch } = ReactRouterDOM
 const LazyComponent = ExternalAsyncComponent({
