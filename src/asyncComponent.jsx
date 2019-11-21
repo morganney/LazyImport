@@ -14,7 +14,7 @@ const ExternalAsyncComponent = ({
      * or after one hour, whichever comes first.
      */
     componentDidMount() {
-      const oneHour = 10000//3.6e6
+      const oneHour = 3.6e6
       const manifest = JSON.parse(sessionStorage.getItem(baseUrl))
       const updateComponent = module => {
         this.setState({
