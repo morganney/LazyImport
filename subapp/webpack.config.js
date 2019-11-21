@@ -8,7 +8,7 @@ module.exports = {
   },
   output: {
     path: path.join(__dirname, "dist"),
-    filename: "[name].js",
+    filename: "[name].[contenthash].js",
     publicPath: "/",
     library: 'SubApp',
     libraryTarget: "commonjs"

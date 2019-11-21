@@ -18,7 +18,7 @@ global.StyledComponents = StyledComponents
 
 const { BrowserRouter: Router, Route, Link, Switch } = ReactRouterDOM
 const SubApp = ExternalAsyncComponent({
-    baseUrl: '/subapp/dist',
+    baseUrl: 'http://localhost:8080/subapp/dist',
     getBundleUrl: manifest => manifest['subApp.js'],
     getComponent: module => module.SubApp.HelloSubApp
 })
@@ -26,7 +26,7 @@ const Demo = () => {
   return (
     <>
       <p>Hi from container.</p>
-      <Link to='/subapp'>check out the subapp</Link>
+      <Link to='/sub-app'>check out the subapp</Link>
     </>
   )
 }
@@ -37,7 +37,7 @@ const Hello = () => {
         <Route exact path='/'>
           <Demo />
         </Route>
-        <Route path='/subapp'>
+        <Route path='/sub-app'>
           <SubApp />
         </Route>
         <Route>
