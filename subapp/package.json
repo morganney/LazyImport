@@ -1,5 +1,5 @@
 {
-  "name": "pr2",
+  "name": "subapp",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@intouchhealth/components": "1.0.0-beta.7",
     "redux-logger": "4.0.0"
   },
   "devDependencies": {
