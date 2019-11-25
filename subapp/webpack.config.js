@@ -13,6 +13,14 @@ module.exports = {
     library: 'SubApp',
     libraryTarget: "commonjs"
   },
+  resolve: {
+    // These could even be exported by the component library (see the README)
+    alias: {
+      react: path.resolve(__dirname, 'src/shims/react.js'),
+      'react-dom': path.resolve(__dirname, 'src/shims/react-dom.js'),
+      'styled-components': path.resolve(__dirname, 'src/shims/styled-components.js')
+    }
+  },
   module: {
     rules: [
       {

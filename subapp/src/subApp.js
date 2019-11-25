@@ -1,9 +1,9 @@
+import { Button, ThemeProvider, RadioGroup, Radio, Heading, Box, Flex } from '@intouchhealth/components'
 import { store } from './store'
 
 const { useState, useEffect } = React
 const { Provider, connect } = ReactRedux
 const { Switch, Route, Link, withRouter } = ReactRouterDOM
-const { Button, ThemeProvider, RadioGroup, Radio, Heading, Box, Flex } = ITHComponents
 const styled = StyledComponents.default
 
 const FontStyles = styled.div`

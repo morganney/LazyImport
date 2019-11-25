@@ -16,3 +16,15 @@ requires it as a dependency (might as well have the sub-app reference it as a gl
 * What about bookmarking, i.e. deep links into the sub-app's? We need to be able to allow bookmarks into sub-app's.
 * Might need to use localStorage, or redux store to determine whether async components (sub-apps) are loaded. Anytime you
 leave a route managed by the sub-app, it will unmount the async component and then re-fetch the import when going back.
+* To have the shared components work we need to shim their react-based dependencies in sub-apps if we want it to be a
+standalone package useful outside of the container app (projects outside of IWA). It can even potentially export those shims
+so a webpack build for a sub-app can alias them like:
+  ```
+  resolve: {
+    alias: {
+      react: path.resolve(__dirname, 'node_modules/@intouchhealth/components/shims/react.js'),
+      'react-dom': path.resolve(__dirname, 'node_modules/@intouchhealth/components/shims/react-dom.js'),
+      'styled-components': path.resolve(__dirname, 'node_modules/@intouchhealth/components/shims/styled-components.js')
+    }
+  }
+  ```
