@@ -4,17 +4,17 @@ const path = require('path')
 module.exports = {
   context: path.join(__dirname, 'src'),
   entry: {
-    subApp: './index.js'
+    otherSubApp: './index.js'
   },
   output: {
     path: path.join(__dirname, 'dist'),
     filename: '[name].[contenthash].js',
     publicPath: '/',
-    library: 'SubApp',
+    library: 'OtherSubApp',
     libraryTarget: 'commonjs'
   },
   resolve: {
-    // These could even be exported by the component library (see the README)
+    // These should be exported by the component library (see the README)
     alias: {
       react: path.resolve(__dirname, 'src/shims/react.js'),
       'react-dom': path.resolve(__dirname, 'src/shims/react-dom.js'),
@@ -32,7 +32,7 @@ module.exports = {
   plugins: [
     new ManifestPlugin({
       seed: {
-        componentName: 'SubApp'
+        componentName: 'OtherSubApp'
       }
     })
   ]
