@@ -1,0 +1,1 @@
+export { HelloOtherSubApp } from './otherSubApp'

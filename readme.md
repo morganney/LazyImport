@@ -4,10 +4,13 @@ You need to [authenticate with GitHub Registry](https://help.github.com/en/githu
 1. `cd subapp`
 2. `npm install`
 3. `npm run build`
-4. `cd ..` (back to root of repo)
+4. `cd ../otherSubapp`
 5. `npm install`
-6. `npm run start`
-7. Navigate to http://localhost:8080
+6. `npm run build`
+7. `cd ..` (back to root of repo)
+8. `npm install`
+9. `npm run start`
+10. Navigate to http://localhost:8080
 
 ## Notes
 * The container app needs to have at least redux in node_modules to properly build with react-redux, but the sub-app's can
@@ -18,7 +21,7 @@ requires it as a dependency (might as well have the sub-app reference it as a gl
 leave a route managed by the sub-app, it will unmount the async component and then re-fetch the import when going back.
 * To have the shared components work we need to shim their react-based dependencies in sub-apps if we want it to be a
 standalone package useful outside of the container app (projects outside of IWA). It can even potentially export those shims
-so a webpack build for a sub-app can alias them like:
+(or maybe even an alias webpack config) so a webpack build for a sub-app can alias them like:
   ```
   resolve: {
     alias: {
